@@ -8,15 +8,18 @@ public enum GameState
     gameover,
     gameclear,
     setlevel,
+    blowing,
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameState gameState; //ゲームのステータス
 
+
     void Start()
     {
-        
+        //まずはお花セット状態にする
+        gameState = GameState.setflw;
     }
 
     // Update is called once per frame
