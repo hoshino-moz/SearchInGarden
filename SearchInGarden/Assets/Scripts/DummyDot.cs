@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Flower : MonoBehaviour
+public class DummyDot : MonoBehaviour
 {
-    public float ampX;  //風方向の振幅
-    public float dampX;  //風方向の減衰
-    public float freqX;  //風方向の周期
-    public float ampY;  //横方向の振幅
-    public float dampY;  //横方向の減衰
-    public float freqY;  //横方向の周期
+    public float ampX = 1;  //風方向の振幅
+    public float dampX = 1;  //風方向の減衰
+    public float freqX = 1;  //風方向の周期
+    public float ampY = 1;  //横方向の振幅
+    public float dampY = 1;  //横方向の減衰
+    public float freqY = 1;  //横方向の周期
     float timer;
     float moveX;
     float moveY;
@@ -16,6 +16,7 @@ public class Flower : MonoBehaviour
     float diffY;
     bool colliOnce;
 
+    int totalFlwCnt;
 
     Rigidbody2D rbody; //PlayerについているRigidBody2Dを扱うための変数
 
@@ -41,34 +42,17 @@ public class Flower : MonoBehaviour
         // オブジェクトの動きが鈍くなったら固定する
 
         //お花を動かす　playing と blowingの間
-        if (GameManager.gameState == GameState.playing || GameManager.gameState == GameState.blowing)
-        {
-            if (isMove)
-            {
+        //if (GameManager.gameState == GameState.setflw)
+        //{
+            //if (isMove)
+            //{
                 MoveFlower();
-            }
+            //}
 
-        }
+        //}
 
     }
 
-    //InputCircleとぶつかったらお花の動き発動
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (colliOnce) return;
-
-        //ぶつかった相手がInputCircleだったら
-        if (collision.gameObject.CompareTag("InputCircle"))
-        {
-            isMove = true;
-            colliOnce = true;
-
-            //花とInputCircleとの差を取得し、方向を決める　風の方向に揺れる
-            Vector3 v = (transform.position - collision.gameObject.transform.position).normalized;
-            diffX = v.x;
-            diffY = v.y;
-        }
-    }
 
     //実際の動き
     void MoveFlower()
@@ -80,6 +64,6 @@ public class Flower : MonoBehaviour
         //Debug.Log("positionX = " + posX); 
         //Velocity 代入
         //rbody.linearVelocity = new Vector2(moveX, moveY);
-        rbody.linearVelocity = new Vector2(moveX * diffX + moveY * diffX, moveY * diffY + moveX * diffY);
+        rbody.linearVelocity = new Vector2(moveX, moveY);
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Inputcircle : MonoBehaviour
 {
     float timer;
-    float windSpeed = 2.0f;
+    float windSpeed = 4.0f;
 
     private CircleCollider2D circleCollider;
 
@@ -25,7 +25,7 @@ public class Inputcircle : MonoBehaviour
         if (timer < 5.0f)
         {
             transform.localScale = new Vector3(timer * windSpeed, timer * windSpeed, 1);
-            circleCollider.radius = timer * windSpeed / 2;
+            //circleCollider.radius = timer * windSpeed / 2;
         }
        
         //}
