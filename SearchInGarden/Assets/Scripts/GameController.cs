@@ -22,10 +22,9 @@ public class GameController : MonoBehaviour
     float score;
     float stageLevel = 1;
     float timer;
+    int isFindedCnt = 0;
 
-    float[] posFlwX;
-    float[] posFlwY;
-    int[] flowerNum;
+    
 
     void Start()
     {
@@ -69,22 +68,25 @@ public class GameController : MonoBehaviour
                         if (hit.collider.gameObject.name == "ClickTrigger")
                         {
                             Debug.Log("正解に当たった");
-                            //GameObject parentObject = hit.transform.parent.gameObject;
-                            //Flower getFlw = parentObject.GetComponent<Flower>();
-                            //int getFlwNum = getFlw.prefabNum;
-                            score = score + stageLevel * playingTime;
-                            Debug.Log("score " + stageLevel * playingTime);
-                            //Debug.Log("Prefab No. " + getFlwNum);
-
-                            //選択されたオブジェクトのアルファ値を変える
-                            //SpriteRenderer spriteRenderer = parentObject.GetComponent<SpriteRenderer>();
-                            //if (spriteRenderer != null)
-                            //{
-                            //    spriteRenderer.color = new Color(1,1,1,0.5f);
-                            //}
+                            
+                            ClickTrigger click = hit.collider.gameObject.GetComponent<ClickTrigger>();
+                            if (click.isFinded == false)
+                            {
+                                isFindedCnt++;
+                                score = score + stageLevel * playingTime;
+                                Debug.Log("score " + stageLevel * playingTime);
+                                Debug.Log(isFindedCnt + "個目の正解です");
+                                click.isFinded = true;
+                            }
+                           
                         }
                     }
                 }
+            }
+            if (isFindedCnt >= 4)
+            {
+                Debug.Log("ゲームクリア");
+                GameManager.gameState = GameState.gameclear;
             }
         }
     }
@@ -122,11 +124,12 @@ public class GameController : MonoBehaviour
             GameObject newFlw = Instantiate(FlowerTag, randomPosition, Quaternion.identity);
             GameObject crickTr = GameObject.Find("ClickTrigger");
             ClickTrigger criTr = crickTr.GetComponent<ClickTrigger>();
-            //criTr.prefabNum = j;
+            //Debug.Log("選択されたオブジェクト：" + crickTr.gameObject.name);
+            criTr.prefabNum = j;
+            Debug.Log("この花の番号は　" + criTr.prefabNum);
         }
 
         timer = timer + Time.deltaTime;
-        Debug.Log("時間　" +  timer);
     }
 
     void WindBlowing()
