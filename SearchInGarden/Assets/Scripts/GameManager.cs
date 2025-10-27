@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameState gameState; //ゲームのステータス
 
+    public static float scoreTotal;
+    public static float remainingTime;
+
+    public GameController gameCnt;
 
     void Start()
     {
@@ -25,6 +29,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        remainingTime = gameCnt.playingTime;
+        scoreTotal = gameCnt.score;
+        //Debug.Log("これはGameManagerのremainingTimeです" +  remainingTime);
+        //Debug.Log("これはGameManagerのscoreTotalです" +  scoreTotal);
     }
 }

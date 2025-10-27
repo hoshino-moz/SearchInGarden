@@ -1,30 +1,38 @@
-using System.Threading;
+
 using UnityEngine;
+using System.Collections;
 
 
 public class GameController : MonoBehaviour
 {
     public int totalFlwCnt = 30;
-    public int targetFlwCnt =4;
+    public int targetFlwCnt = 4;
     //string[] caraName;
 
     public GameObject FlowerOrg;
     public GameObject FlowerTag;
-    
+
     public GameObject InputCircle;
     public GameObject ClickTrigger;
+
+    public SpriteRenderer Indicator1;
+    public SpriteRenderer Indicator2;
+    public SpriteRenderer Indicator3;
+    public SpriteRenderer Indicator4;
+
+    public GameObject gameClearPanel;
+    public GameObject timeOverPanel;
+    
 
     Vector2 spawnArea = new Vector2(12f, 5f);
 
     bool isBlow = false;
     float inputTime = 0;
-    float playingTime = 25;
-    float score;
+    public float playingTime = 25;
+    public float score;
     float stageLevel = 1;
     float timer;
     int isFindedCnt = 0;
-
-    
 
     void Start()
     {
@@ -37,56 +45,27 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+
         //風送り待ち
         if (GameManager.gameState == GameState.blowing)
         {
-        WindBlowing();
+            WindBlowing();
         }
 
         //ターゲットピック動作
         if (GameManager.gameState == GameState.playing)
         {
+            //Lucky Flower をPicUpした時の動作
             playingTime = playingTime - Time.deltaTime;
             if (playingTime > 0)
             {
-                // マウスクリックを検知
-                if (Input.GetMouseButtonDown(0)) // 0は左クリック
-                {
-                    // マウスの位置をワールド座標に変換
-                    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                    // マウスの位置からRayを飛ばし、衝突したコライダーを取得
-                    RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-                    // 何らかのオブジェクトに衝突した場合
-                    if (hit.collider != null)
-                    {
-                        // 衝突したオブジェクトを選択する処理を記述
-                        //Debug.Log("選択されたオブジェクト：" + hit.collider.gameObject.name);
-                        if (hit.collider.gameObject.name == "ClickTrigger")
-                        {
-                            Debug.Log("正解に当たった");
-                            
-                            ClickTrigger click = hit.collider.gameObject.GetComponent<ClickTrigger>();
-                            if (click.isFinded == false)
-                            {
-                                isFindedCnt++;
-                                score = score + stageLevel * playingTime;
-                                Debug.Log("score " + stageLevel * playingTime);
-                                Debug.Log(isFindedCnt + "個目の正解です");
-                                click.isFinded = true;
-                            }
-                           
-                        }
-                    }
-                }
+                PickUpLuckyFlw();
             }
-            if (isFindedCnt >= 4)
+
+            //ゲームクリアしたら
+            if (isFindedCnt >= 4 || playingTime <0 )
             {
-                Debug.Log("ゲームクリア");
-                GameManager.gameState = GameState.gameclear;
+                StartCoroutine(GameClear());
             }
         }
     }
@@ -102,7 +81,7 @@ public class GameController : MonoBehaviour
 
             // お花のプレハブを生成
             Instantiate(FlowerOrg, randomPosition, Quaternion.identity);
-            
+
         }
     }
 
@@ -111,7 +90,7 @@ public class GameController : MonoBehaviour
         //Debug.Log("特殊花　" + targetFlwCnt);
         for (int j = 0; j < targetFlwCnt; j++)
         {
-           
+
             // ランダムな位置を計算
             float randomX = Random.Range(-spawnArea.x / 2, spawnArea.x / 2);
             float randomY = Random.Range(-spawnArea.y / 2, spawnArea.y / 2);
@@ -161,6 +140,81 @@ public class GameController : MonoBehaviour
                 Vector3 pos = new(0, 0, 0);
                 Instantiate(InputCircle, pos, Quaternion.identity);
             }
+        }
+    }
+
+    IEnumerator GameClear()
+    {
+
+        // 1秒待機
+        yield return new WaitForSeconds(1.0f);
+
+        Debug.Log("ゲームクリア");
+        GameManager.gameState = GameState.gameclear;
+        if (isFindedCnt >= 4)
+        {
+            gameClearPanel.SetActive(true);
+        }
+        if (playingTime < 0)
+        {
+            timeOverPanel.SetActive(true);
+        }
+        
+    }
+
+    void PickUpLuckyFlw()
+    {
+        // マウスクリックを検知
+        if (Input.GetMouseButtonDown(0)) // 0は左クリック
+        {
+            // マウスの位置をワールド座標に変換
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // マウスの位置からRayを飛ばし、衝突したコライダーを取得
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+            // 何らかのオブジェクトに衝突した場合
+            if (hit.collider != null)
+            {
+                // 衝突したオブジェクトを選択する処理を記述
+                //Debug.Log("選択されたオブジェクト：" + hit.collider.gameObject.name);
+                if (hit.collider.gameObject.name == "ClickTrigger")
+                {
+                    Debug.Log("正解に当たった");
+
+                    ClickTrigger click = hit.collider.gameObject.GetComponent<ClickTrigger>();
+                    if (click.isFinded == false)
+                    {
+                        isFindedCnt++;
+                        score = score + stageLevel * playingTime;
+                        Debug.Log("score " + stageLevel * playingTime);
+                        Debug.Log(isFindedCnt + "個目の正解です");
+                        PickUpUI();
+                        click.isFinded = true;
+                    }
+
+                }
+            }
+        }
+    }
+
+    void PickUpUI ()
+    {
+        if (isFindedCnt == 1)
+        {
+            Indicator1.color = Color.yellow;
+        }
+        if (isFindedCnt == 2)
+        {
+            Indicator2.color = Color.yellow;
+        }
+        if (isFindedCnt == 3)
+        {
+            Indicator3.color = Color.yellow;
+        }
+        if (isFindedCnt == 4)
+        {
+            Indicator4.color = Color.yellow;
         }
     }
 }

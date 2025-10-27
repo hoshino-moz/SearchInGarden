@@ -16,6 +16,9 @@ public class FlowerTag : MonoBehaviour
     float diffY;
     bool colliOnce;
 
+    private SpriteRenderer spriteRenderer;
+
+    GameObject clickTr;
 
     Rigidbody2D rbody; //PlayerについているRigidBody2Dを扱うための変数
 
@@ -24,9 +27,8 @@ public class FlowerTag : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>(); //Playerについているコンポーネント情報を取得
         GameObject clickTr = transform.Find("ClickTrigger").gameObject;
-        ClickTrigger click = clickTr.GetComponent<ClickTrigger>();
-        Debug.Log("この特殊花は　" + click.prefabNum );
-        Debug.Log("この特殊花は　" + click.isFinded);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -51,13 +53,17 @@ public class FlowerTag : MonoBehaviour
             {
                 MoveFlower();
             }
+
+
+            GameObject clickTr = transform.Find("ClickTrigger").gameObject;
+            ClickTrigger click = clickTr.GetComponent<ClickTrigger>();
+            if (click.isFinded)
+            {
+                ChangeSpriteAlpha(0.3f); // アルファ値を0.3に変更する
+            }
         }
 
-        //if ()
-        //{
-        //    //アルファ値を変更する
 
-        //}
 
     }
 
@@ -91,4 +97,13 @@ public class FlowerTag : MonoBehaviour
         //rbody.linearVelocity = new Vector2(moveX, moveY);
         rbody.linearVelocity = new Vector2(moveX * diffX + moveY * diffX, moveY * diffY + moveX * diffY);
     }
+
+    //クリックされたら暗くして分かるようにする
+    public void ChangeSpriteAlpha(float alpha)
+    {
+        Color color = spriteRenderer.color;
+        color.a = alpha;
+        spriteRenderer.color = color;
+    }
 }
+
