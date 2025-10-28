@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
     float inputTime = 0;
     public float playingTime = 25;
     public float score;
-    float stageLevel = 1;
+    public float stageLevel = 1;
     float timer;
     int isFindedCnt = 0;
 

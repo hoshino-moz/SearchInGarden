@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Inputcircle : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Inputcircle : MonoBehaviour
     {
         // ゲームオブジェクトのCircleCollider2Dコンポーネントを取得
         circleCollider = GetComponent<CircleCollider2D>();
+
+        StartCoroutine(SelfClean());
     }
 
     // Update is called once per frame
@@ -29,5 +32,16 @@ public class Inputcircle : MonoBehaviour
         }
        
         //}
+    }
+
+    IEnumerator SelfClean()
+    {
+
+        // 1秒待機
+        yield return new WaitForSeconds(7.0f);
+
+        Debug.Log("ゲームクリア");
+        Destroy(gameObject);
+
     }
 }

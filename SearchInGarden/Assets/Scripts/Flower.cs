@@ -30,14 +30,14 @@ public class Flower : MonoBehaviour
     {
         //風を送るとどっちらかるの対策
         // オブジェクトの動きが鈍くなったら固定する
-        if (rbody.linearVelocity.magnitude < 0.01f)
-        {
-            rbody.constraints = RigidbodyConstraints2D.FreezePosition;
-        }
-        else
-        {
-            rbody.constraints = RigidbodyConstraints2D.None;
-        }
+        //if (rbody.linearVelocity.magnitude < 0.01f)
+        //{
+        //    rbody.constraints = RigidbodyConstraints2D.FreezePosition;
+        //}
+        //else
+        //{
+        //    rbody.constraints = RigidbodyConstraints2D.None;
+        //}
         // オブジェクトの動きが鈍くなったら固定する
 
         //お花を動かす　playing と blowingの間

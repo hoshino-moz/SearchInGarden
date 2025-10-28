@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7542259402437010355}
   - component: {fileID: 7510045660274768435}
   m_Layer: 0
-  m_Name: FlowerOrg
+  m_Name: UmeFlowerOrg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   ampX: 2
   dampX: 0.05
   freqX: 1
-  ampY: 0.5
+  ampY: 0.2
   dampY: 0.2
   freqY: 1
 --- !u!212 &774970290329591046
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 2791516771515692490, guid: 61653640c2f2bb64c900fa2db76247f4, type: 3}
+  m_Sprite: {fileID: 7911300329580283220, guid: f8fac79c00b82a646b761a82d10b9bce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,4 +170,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 2
+  m_Radius: 0.7
