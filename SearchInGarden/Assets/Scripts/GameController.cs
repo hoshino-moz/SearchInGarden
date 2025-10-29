@@ -31,11 +31,19 @@ public class GameController : MonoBehaviour
     public float playingTime = 25;
     public float score;
     public float stageLevel = 1;
+    public bool restart;
     float timer;
     int isFindedCnt = 0;
 
     void Start()
     {
+        if (!restart)
+        {
+            score = GameManager.scoreTotal;
+            Debug.Log("シーンリスたーと" +  score);
+        }
+        
+
         GenerateDots(); //普通花のランダムな配置
         GenerateTags(); //特徴花のランダムな配置
         //ゲームステートをプレイにする
@@ -151,6 +159,8 @@ public class GameController : MonoBehaviour
 
         Debug.Log("ゲームクリア");
         GameManager.gameState = GameState.gameclear;
+        GameManager.scoreTotal = score;
+
         if (isFindedCnt >= 4)
         {
             gameClearPanel.SetActive(true);

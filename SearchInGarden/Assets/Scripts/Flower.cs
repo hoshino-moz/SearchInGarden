@@ -80,6 +80,6 @@ public class Flower : MonoBehaviour
         //Debug.Log("positionX = " + posX); 
         //Velocity 代入
         //rbody.linearVelocity = new Vector2(moveX, moveY);
-        rbody.linearVelocity = new Vector2(moveX * diffX + moveY * diffX, moveY * diffY + moveX * diffY);
+        rbody.linearVelocity = new Vector2((moveX * diffX) + (moveY * -diffY), (moveX * diffY) + (moveY * diffX));
     }
 }

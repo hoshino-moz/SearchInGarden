@@ -119,6 +119,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &351309871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351309873}
+  - component: {fileID: 351309872}
+  m_Layer: 0
+  m_Name: StartGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &351309872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351309871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a32b57dff845d4daabd991be4dd89d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManeger: {fileID: 4535202783575815046, guid: 193dfbb7a982d794182d447480b69eff, type: 3}
+  sceneName: 
+--- !u!4 &351309873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351309871}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 455.8343, y: 281.89584, z: -5.358783}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740744370
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,8 +345,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1062756944}
+  - component: {fileID: 1062756949}
   - component: {fileID: 1062756948}
-  - component: {fileID: 1062756947}
   - component: {fileID: 1062756946}
   - component: {fileID: 1062756945}
   m_Layer: 5
@@ -374,8 +420,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1062756947}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
+      - m_Target: {fileID: 1062756949}
+        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
         m_MethodName: Load
         m_Mode: 1
         m_Arguments:
@@ -416,20 +462,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1062756947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062756943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 122273f91eb3f5f43910e44c30cf6f1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneName: Main
-  toTitle: 0
 --- !u!222 &1062756948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -438,6 +470,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062756943}
   m_CullTransparentMesh: 1
+--- !u!114 &1062756949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062756943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a32b57dff845d4daabd991be4dd89d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManeger: {fileID: 0}
+  sceneName: Main
 --- !u!1 &1231902767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,3 +1156,4 @@ SceneRoots:
   - {fileID: 1051861795}
   - {fileID: 1575198009}
   - {fileID: 740744373}
+  - {fileID: 351309873}

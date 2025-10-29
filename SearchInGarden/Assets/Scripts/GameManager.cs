@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         remainingTime = gameCnt.playingTime;
-        scoreTotal = gameCnt.score;
+        //scoreTotal = gameCnt.score;
+        //scoreTotal = scoreTotal + gameCnt.score;
         //Debug.Log("これはGameManagerのremainingTimeです" +  remainingTime);
         //Debug.Log("これはGameManagerのscoreTotalです" +  scoreTotal);
     }
