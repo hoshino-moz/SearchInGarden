@@ -457,6 +457,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SidePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 268489574796625671, guid: 046f8242087cbde4bb342cbddffbe2e6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8241542230870026895, guid: 046f8242087cbde4bb342cbddffbe2e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
